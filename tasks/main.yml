@@ -1,0 +1,42 @@
+---
+- name: Ensure Prometheus App Dirs exist
+  file: >
+    path="{{kops_install_dir}}/{{item}}"
+    owner=root
+    group=root
+    mode=0755
+    state=directory
+  with_items:
+    - etc
+    - bin
+    - log
+    - data
+
+- name: Ensure Download dir exists
+  file:
+    path: {{ kops_install_dir }}
+
+- name: Download Kops Binary
+  get_url:
+    url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version }}/kops-linux-amd64"
+    dest: "{{kops_install_dir}}/bin/kops"
+
+- name: set Kops perms
+  file:
+    path: "{{kops_install_dir}}/bin/kops"
+    owner: root
+    mode: 0755
+    state: file
+
+- name: Download Kubectl Binary
+  get_url:
+    url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version }}/bin/linux/amd64/kubectl"
+    dest: "{{kops_install_dir}}/bin/kubectl"
+
+- name: set kubectl perms
+  file:
+    path: "{{kops_install_dir}}/bin/kubectl"
+    owner: root
+    mode: 0755
+    state: file
+
