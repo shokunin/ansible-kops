@@ -30,7 +30,7 @@
 
 - name: Download Kubectl Binary
   get_url:
-    url: "https://storage.googleapis.com/kubernetes-release/release/{{ kubectl_version }}/bin/linux/amd64/kubectl"
+    url: "https://storage.googleapis.com/kubernetes-release/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl"
     dest: "{{kops_install_dir}}/bin/kubectl"
 
 - name: set kubectl perms
