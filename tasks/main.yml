@@ -14,7 +14,7 @@
 
 - name: Ensure Download dir exists
   file:
-    path: {{ kops_install_dir }}
+    path: "{{ kops_install_dir }}"
 
 - name: Download Kops Binary
   get_url:
